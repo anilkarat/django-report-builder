@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="django-report-builder",
+    name="django-voiro-report-builder",
     version="3.3.0",
     author="David Burke, Voiro LLP",
     author_email="david@burkesoftware.com, support@voiro.com",
