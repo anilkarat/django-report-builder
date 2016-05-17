@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 setup(
     name="django-report-builder",
     version="3.3.0",
-    author="David Burke",
-    author_email="david@burkesoftware.com",
+    author="David Burke, Voiro LLP",
+    author_email="david@burkesoftware.com, support@voiro.com",
     description=("Query and Report builder for Django ORM"),
     license="BSD",
     keywords="django report",
-    url="https://github.com/burke-software/django-report-builder",
+    url="https://github.com/anilkarat/django-report-builder",
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
