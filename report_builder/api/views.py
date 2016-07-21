@@ -241,9 +241,15 @@ class GenerateReport(DataExportMixin, APIView):
         return self.post(request, report_id=report_id)
 
     def post(self, request, report_id=None):
+        custom_filters = {}
         report = get_object_or_404(Report, pk=report_id)
 
+        if "custom_filters" in request.GET:
+            if request.GET["custom_filters"]:
+                custom_filters = eval(request.GET["custom_filters"])
+
         objects_list = report.report_to_list(
+            custom_filters,
             user=request.user,
             preview=True,)
         display_fields = report.get_good_display_fields().values_list(
