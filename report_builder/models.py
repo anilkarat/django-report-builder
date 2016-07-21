@@ -146,11 +146,11 @@ class Report(models.Model):
                 bad_display_fields.append(display_field)
         return display_fields.exclude(id__in=[o.id for o in bad_display_fields])
 
-    def report_to_list(self, queryset=None, user=None, preview=False):
+    def report_to_list(self, custom_filters=None, queryset=None, user=None, preview=False):
         """ Convert report into list. """
         property_filters = []
         if queryset is None:
-            queryset = self.get_query()
+            queryset = self.get_query(custom_filters)
             for field in self.filterfield_set.all():
                 if field.field_type in ["Property"]:
                     property_filters += [field]
@@ -293,7 +293,7 @@ class Report(models.Model):
 
         return data_list
 
-    def get_query(self):
+    def get_query(self, custom_filters=None):
         report = self
         model_class = self.root_model_class
 
@@ -343,8 +343,13 @@ class Report(models.Model):
                 excludes.update(filter_)
 
         if filters:
+            if custom_filters:
+                filters = self.addCustomFilterValues(filters, custom_filters)
             objects = objects.filter(**filters)
+
         if excludes:
+            if custom_filters:
+                excludes = self.addCustomFilterValues(excludes, custom_filters)
             objects = objects.exclude(**excludes)
 
         # Apply annotation-filters after regular filters.
@@ -369,6 +374,17 @@ class Report(models.Model):
             objects = objects.distinct()
 
         return objects
+
+    def addCustomFilterValues(self, original_filters, custom_filters):
+        for filter_key in original_filters.keys():
+            if filter_key in custom_filters:
+                if "range" in filter_key or "in" in filter_key:
+                    original_filters[filter_key] = custom_filters[filter_key].split(",")
+                else:
+                    original_filters[filter_key] = custom_filters[filter_key]
+
+        return original_filters
+
 
     @models.permalink
     def get_absolute_url(self):
