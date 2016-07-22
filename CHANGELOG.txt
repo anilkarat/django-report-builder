@@ -1,3 +1,22 @@
+VERSION: 0.0.3
+2016-07-22 06:14:26.497030
+--------------------------
+
+Fri Jul 22 11:42:53 2016 +0530(Ankit Richariya): Merge branch 'master' of https://github.com/anilkarat/django-report-builder
+                                  files_changed: 
+
+
+Fri Jul 22 11:42:05 2016 +0530(Ankit Richariya): custom filter receiving order changed
+                                  files_changed: report_builder/models.py
+
+Fri Jul 22 11:41:11 2016 +0530(Ankit Richariya): custom filter passing to function order changed
+                                  files_changed: report_builder/api/views.py
+
+Thu Jul 21 10:50:06 2016 +0000(Jenkins): updating changelog
+
+                                  files_changed: CHANGELOG.txt
+                                                 setup.py
+
 VERSION: 0.0.2
 2016-07-21 10:50:06.139541
 --------------------------
