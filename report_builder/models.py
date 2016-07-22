@@ -146,7 +146,7 @@ class Report(models.Model):
                 bad_display_fields.append(display_field)
         return display_fields.exclude(id__in=[o.id for o in bad_display_fields])
 
-    def report_to_list(self, custom_filters=None, queryset=None, user=None, preview=False):
+    def report_to_list(self, queryset=None, user=None, preview=False, custom_filters=None):
         """ Convert report into list. """
         property_filters = []
         if queryset is None:
