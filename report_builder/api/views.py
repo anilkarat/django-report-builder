@@ -249,9 +249,9 @@ class GenerateReport(DataExportMixin, APIView):
                 custom_filters = eval(request.GET["custom_filters"])
 
         objects_list = report.report_to_list(
-            custom_filters,
             user=request.user,
-            preview=True,)
+            preview=True,
+            custom_filters=custom_filters,)
         display_fields = report.get_good_display_fields().values_list(
             'name', flat=True)
         response = {
