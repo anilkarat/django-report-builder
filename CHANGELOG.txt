@@ -1,3 +1,18 @@
+VERSION: 0.0.2
+2016-07-21 10:50:06.139541
+--------------------------
+
+Thu Jul 21 16:13:34 2016 +0530(Ankit Richariya): custom filters parameter added
+                                  files_changed: report_builder/api/views.py
+
+Thu Jul 21 16:13:18 2016 +0530(Ankit Richariya): custom filters added
+                                  files_changed: report_builder/models.py
+
+Tue May 17 10:29:34 2016 +0000(Jenkins): updating changelog
+
+                                  files_changed: CHANGELOG.txt
+                                                 setup.py
+
 VERSION: 0.0.1
 2016-05-17 10:29:34.082757
 --------------------------

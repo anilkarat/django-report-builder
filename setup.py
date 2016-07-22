@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="django-voiro-report-builder",
-    version="0.0.1",
+    version="0.0.2",
     author="David Burke, Voiro LLP",
     author_email="david@burkesoftware.com, support@voiro.com",
     description=("Query and Report builder for Django ORM"),
