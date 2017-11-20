@@ -149,7 +149,7 @@ class Report(models.Model):
         """ Convert report into list. """
         property_filters = []
         if queryset is None:
-            queryset = self.get_query(custom_filters)
+            queryset = self.get_query(custom_filters, user)
             for field in self.filterfield_set.all():
                 if field.field_type in ["Property"]:
                     property_filters += [field]
@@ -292,17 +292,23 @@ class Report(models.Model):
 
         return data_list
 
-    def get_query(self, custom_filters=None):
+    def get_query(self, custom_filters=None, user=None):
         report = self
         model_class = self.root_model_class
 
         # Check for report_builder_model_manger property on the model
         if getattr(model_class, 'report_builder_model_manager', False):
-            objects = getattr(model_class, 'report_builder_model_manager').all()
+            if hasattr(getattr(model_class, 'report_builder_model_manager'),"for_user"):
+                objects = getattr(model_class, 'report_builder_model_manager').for_user(user)
+            else:
+                objects = getattr(model_class, 'report_builder_model_manager').all()
         else:
             # Get global model manager
             manager = report._get_model_manager()
-            objects = getattr(model_class, manager).all()
+            if hasattr(getattr(model_class, manager),"for_user"):
+                objects = getattr(model_class, manager).for_user(user)
+            else:
+                objects = getattr(model_class, manager).all()
 
         # Filters
         # NOTE: group all the filters together into one in order to avoid
