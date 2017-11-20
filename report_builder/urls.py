@@ -10,13 +10,14 @@ router.register(r'reports', api_views.ReportViewSet)
 router.register(r'report', api_views.ReportNestedViewSet)
 router.register(r'formats', api_views.FormatViewSet)
 router.register(r'filterfields', api_views.FilterFieldViewSet)
+router.register(r'contenttypes', api_views.ContentTypeViewSet)
 
 urlpatterns = [
     url(r'^report/(?P<pk>\d+)/download_file/$', views.DownloadFileView.as_view(), name="report_download_file"),
     url(r'^report/(?P<pk>\d+)/download_file/(?P<filetype>.+)/$', views.DownloadFileView.as_view(), name="report_download_file"),
     url(r'^report/(?P<pk>\d+)/check_status/(?P<task_id>.+)/$', views.check_status, name="report_check_status"),
-    url(r'^report/(?P<pk>\d+)/add_star/$', views.ajax_add_star),
-    url(r'^report/(?P<pk>\d+)/create_copy/$', views.create_copy),
+    url(r'^report/(?P<pk>\d+)/add_star/$', views.ajax_add_star, name="ajax_add_star"),
+    url(r'^report/(?P<pk>\d+)/create_copy/$', views.create_copy, name="report_builder_create_copy"),
     url(r'^export_to_report/$', views.ExportToReport.as_view(), name="export_to_report"),
     url(r'^api/', include(router.urls)),
     url(r'^api/api-auth/', include('rest_framework.urls', namespace='rest_framework')),

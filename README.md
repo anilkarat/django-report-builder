@@ -4,15 +4,22 @@ django-report-builder
 A GUI for Django ORM. Build custom queries and display results.
 Targets sys admins and capable end users who might not be able to program or gain direct interactive shell access.
 
-[![Build Status](https://travis-ci.org/burke-software/django-report-builder.png?branch=master)](https://travis-ci.org/burke-software/django-report-builder) [![Bountysource](https://www.bountysource.com/badge/tracker?tracker_id=314767)](https://www.bountysource.com/trackers/314767-burke-software-django-report-builder?utm_source=314767&utm_medium=shield&utm_campaign=TRACKER_BADGE)
-[![Coverage Status](https://coveralls.io/repos/burke-software/django-report-builder/badge.svg)](https://coveralls.io/r/burke-software/django-report-builder)
-
+[![pipeline status](https://gitlab.com/burke-software/django-report-builder/badges/master/pipeline.svg)](https://gitlab.com/burke-software/django-report-builder/commits/master)
+[![coverage report](https://gitlab.com/burke-software/django-report-builder/badges/master/coverage.svg)](https://gitlab.com/burke-software/django-report-builder/commits/master)
 
 # News
 
-3.3 is released. 
+## 3.6 (WIP)
 
-Official support is now for Django 1.8 and 1.9. Python 2.7 and 3.5 (I'm sure 3.4 works but no longer unit testing it). For Django < 1.8 please use the 3.2 release.
+- Fix bug affecting Django 1.10 and 1.11
+- Moved to tox for testing
+
+## 3.5
+
+- Compatible with Django 1.11
+- Manifest containers only needed static assets, greatly reducing file size.
+- No longer testing in Django 1.9, but probably still works.
+- Remains in maintence mode - no features
 
 # What is Django Report Builder?
 
@@ -26,8 +33,6 @@ Official support is now for Django 1.8 and 1.9. Python 2.7 and 3.5 (I'm sure 3.4
 - Very simple security, user must have change or "view" permission to view
 reports. Unprivileged users can still build reports and see database schema.
 - Model properties (thanks yekibud)
-- Support for [django-custom-fields](https://github.com/burke-software/django-custom-field)
-- Support for django-hstore
 - Export to Report global admin action
 - Optional asynchronous report generation
 
@@ -37,10 +42,4 @@ http://django-report-builder.readthedocs.org/
 
 [Google group](https://groups.google.com/forum/#!forum/django-report-builder/).
 
-# [Hacking](http://django-report-builder.readthedocs.org/en/latest/hacking/)
-
-# Discussion
-
-Let us know your thoughts at https://google.com/+Burkesoftware
-
-[2.x]: https://github.com/burke-software/django-report-builder/tree/2.x
+[Hacking](http://django-report-builder.readthedocs.org/en/latest/hacking/)

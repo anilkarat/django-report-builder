@@ -1,3 +1,4 @@
+import copy
 from django.contrib.contenttypes.models import ContentType
 from django.shortcuts import get_object_or_404
 from django.utils.functional import cached_property
@@ -6,12 +7,11 @@ from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
+from ..models import Report, Format, FilterField
 from .serializers import (
     ReportNestedSerializer, ReportSerializer, FormatSerializer,
-    FilterFieldSerializer)
-from report_builder.models import Report, Format, FilterField
-from report_utils.mixins import GetFieldsMixin, DataExportMixin
-import copy
+    FilterFieldSerializer, ContentTypeSerializer)
+from ..mixins import GetFieldsMixin, DataExportMixin
 
 
 def find_exact_position(fields_list, item):
@@ -24,27 +24,39 @@ def find_exact_position(fields_list, item):
     return -1
 
 
-class FormatViewSet(viewsets.ModelViewSet):
-    queryset = Format.objects.all()
-    serializer_class = FormatSerializer
+class ReportBuilderViewMixin:
+    """ Set up explicit settings so that project defaults
+    don't interfer with report builder's api. """
     pagination_class = None
 
 
-class FilterFieldViewSet(viewsets.ModelViewSet):
+class FormatViewSet(ReportBuilderViewMixin, viewsets.ModelViewSet):
+    queryset = Format.objects.all()
+    serializer_class = FormatSerializer
+
+
+class FilterFieldViewSet(ReportBuilderViewMixin, viewsets.ModelViewSet):
     queryset = FilterField.objects.all()
     serializer_class = FilterFieldSerializer
 
 
-class ReportViewSet(viewsets.ModelViewSet):
+class ContentTypeViewSet(ReportBuilderViewMixin, viewsets.ReadOnlyModelViewSet):
+    """ Read only view of content types.
+    Used to populate choices for new report root model.
+    """
+    queryset = ContentType.objects.all()
+    serializer_class = ContentTypeSerializer
+    permission_classes = (IsAdminUser,)
+
+
+class ReportViewSet(ReportBuilderViewMixin, viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportSerializer
-    pagination_class = None
 
 
-class ReportNestedViewSet(viewsets.ModelViewSet):
+class ReportNestedViewSet(ReportBuilderViewMixin, viewsets.ModelViewSet):
     queryset = Report.objects.all()
     serializer_class = ReportNestedSerializer
-    pagination_class = None
 
     def perform_create(self, serializer):
         serializer.save(user_created=self.request.user)
@@ -53,7 +65,7 @@ class ReportNestedViewSet(viewsets.ModelViewSet):
         serializer.save(user_modified=self.request.user)
 
 
-class RelatedFieldsView(GetFieldsMixin, APIView):
+class RelatedFieldsView(ReportBuilderViewMixin, GetFieldsMixin, APIView):
 
     """ Get related fields from an ORM model
     """
@@ -234,7 +246,7 @@ class FieldsView(RelatedFieldsView):
         return Response(result)
 
 
-class GenerateReport(DataExportMixin, APIView):
+class GenerateReport(ReportBuilderViewMixin, DataExportMixin, APIView):
     permission_classes = (IsAdminUser,)
 
     def get(self, request, report_id=None):

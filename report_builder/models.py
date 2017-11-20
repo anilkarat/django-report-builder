@@ -10,8 +10,8 @@ from django.db.models import Avg, Min, Max, Count, Sum, F
 from django.db.models.fields import FieldDoesNotExist
 from six import text_type
 from report_builder.unique_slugify import unique_slugify
-from report_utils.model_introspection import get_model_from_path_string
-from .utils import sort_data, increment_total, formatter
+from .utils import (
+    get_model_from_path_string, sort_data, increment_total, formatter)
 from dateutil import parser
 from decimal import Decimal
 from functools import reduce
@@ -121,8 +121,7 @@ class Report(models.Model):
 
         # Is it a ORM field?
         try:
-            return model._meta.get_field_by_name(
-                field_name)[0].get_internal_type()
+            return model._meta.get_field(field_name).get_internal_type()
         except FieldDoesNotExist:
             pass
         # Is it a property?
@@ -419,7 +418,7 @@ class Report(models.Model):
 
     def copy_report(self):
         return '<a href="{0}"><img style="width: 26px; margin: -6px" src="{1}report_builder/img/copy.svg"/></a>'.format(
-            reverse('report_builder.views.create_copy', args=[self.id]),
+            reverse('report_builder_create_copy', args=[self.id]),
             getattr(settings, 'STATIC_URL', '/static/'),
         )
     copy_report.short_description = "Copy"

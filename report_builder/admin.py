@@ -62,7 +62,7 @@ class ReportAdmin(admin.ModelAdmin):
         else:
             img = static_url + 'report_builder/img/unstar.png'
         return '<a href="javascript:void(0)" onclick="ajax_add_star(this, \'{0}\')"><img style="width: 26px; margin: -6px;" src="{1}"/></a>'.format(
-            reverse('report_builder.views.ajax_add_star', args=[obj.id]),
+            reverse('ajax_add_star', args=[obj.id]),
             img)
     ajax_starred.allow_tags = True
     ajax_starred.short_description = "Starred"
@@ -79,6 +79,7 @@ class ReportAdmin(admin.ModelAdmin):
         if star_user:  # Star created reports automatically
             obj.starred.add(request.user)
 
+
 admin.site.register(Report, ReportAdmin)
 admin.site.register(Format)
 
@@ -91,6 +92,7 @@ def export_to_report(modeladmin, request, queryset):
         selected.append(str(s))
     ct = ContentType.objects.get_for_model(queryset.model)
     return HttpResponseRedirect(reverse('export_to_report') + "?ct=%s&admin_url=%s&ids=%s" % (ct.pk, admin_url, ",".join(selected)))
+
 
 if getattr(settings, 'REPORT_BUILDER_GLOBAL_EXPORT', False):
     admin.site.add_action(export_to_report, 'Export to Report')
