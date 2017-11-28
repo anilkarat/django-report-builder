@@ -1,3 +1,150 @@
+VERSION: 0.0.4
+2017-11-28 12:04:16.346310
+--------------------------
+
+Mon Nov 20 16:54:41 2017 +0530(Jithin George): <VE-509> Put in object level permissions
+                                  files_changed: report_builder/models.py
+                                                 report_builder/urls.py
+                                                 report_builder/views.py
+                                                 setup.py
+
+Mon Nov 20 12:10:24 2017 +0530(Jithin George): Merged burke 3.6 version to voiro version
+                                  files_changed: 
+
+
+Thu Aug 17 15:59:01 2017 -0400(David Burke): Release 3.6.0
+                                  files_changed: setup.py
+
+Thu Aug 17 15:53:06 2017 -0400(David Burke): coverage
+                                  files_changed: .gitlab-ci.yml
+
+Thu Aug 17 15:51:06 2017 -0400(David Burke): coverage
+                                  files_changed: .gitlab-ci.yml
+
+Thu Aug 17 15:50:28 2017 -0400(David Burke): Added coverage badge
+                                  files_changed: README.md
+
+Thu Aug 17 15:49:17 2017 -0400(David Burke): coverage
+                                  files_changed: .gitlab-ci.yml
+                                                 docs/hacking.md
+                                                 docs/index.md
+                                                 requirements.txt
+
+Wed Aug 16 18:17:44 2017 -0400(David Burke): Updated readme
+                                  files_changed: CHANGELOG
+                                                 README.md
+
+Wed Aug 16 18:10:23 2017 -0400(David Burke): Fixes #255
+Added tox for local testing with multiple django versions
+Use gitlab CI instead of travis for tests
+                                  files_changed: .gitlab-ci.yml
+                                                 .travis.yml
+                                                 report_builder/mixins.py
+                                                 report_builder/tests.py
+                                                 tox.ini
+
+Mon May 22 18:22:08 2017 -0400(David Burke): New version
+                                  files_changed: README.md
+                                                 setup.py
+
+Mon May 22 18:11:18 2017 -0400(David Burke): Manually note each needed file in manifest...ugh need to switch to
+bundler system
+                                  files_changed: MANIFEST.in
+
+Mon May 22 17:50:41 2017 -0400(David Burke): No longer testing in python 2
+                                  files_changed: .travis.yml
+
+Mon May 22 17:47:54 2017 -0400(David Burke): Update for django 1.11
+                                  files_changed: .travis.yml
+                                                 Dockerfile
+                                                 report_builder/views.py
+                                                 requirements-dev.txt
+                                                 requirements.txt
+                                                 setup.py
+
+Wed Nov 30 15:46:45 2016 -0500(David Burke): Merge pull request #249 from predatell/master
+                                  files_changed: 
+
+
+Wed Nov 30 14:47:38 2016 -0500(David Burke): 3.4.3
+                                  files_changed: setup.py
+
+Wed Nov 30 14:44:05 2016 -0500(David Burke): Fixed related field in django 1.10
+                                  files_changed: report_builder/mixins.py
+                                                 report_builder/tests.py
+
+Wed Nov 30 14:05:15 2016 -0500(David Burke): Set explicit pagination class on content types api view
+                                  files_changed: report_builder/api/views.py
+                                                 report_builder_demo/settings.py
+
+Wed Sep 7 22:54:00 2016 -0400(Craig Weber): Reduce package size from 4MiB to 100KiB by excluding bower_components
+                                  files_changed: MANIFEST.in
+
+Sun Aug 14 13:38:50 2016 -0400(David Burke): Doing minor release for soom 1.10 support
+                                  files_changed: README.md
+                                                 setup.py
+
+Sun Aug 14 13:16:25 2016 -0400(David Burke): get_direct_fields_From_model works in 1.10
+                                  files_changed: report_builder/utils.py
+
+Sun Aug 14 13:10:32 2016 -0400(David Burke): Fixed url reverse for django 1.10
+                                  files_changed: report_builder/admin.py
+                                                 report_builder/models.py
+                                                 report_builder/urls.py
+
+Sun Aug 14 13:02:19 2016 -0400(David Burke): Fixed regression on get_relation_fields_from_model for Django<1.10
+Most 1.10 tests pass but not all yet
+                                  files_changed: report_builder/mixins.py
+                                                 report_builder/utils.py
+
+Sat Aug 13 16:59:33 2016 -0400(David Burke): Merge branch 'master' of https://github.com/burke-software/django-report-builder
+                                  files_changed: 
+
+
+Sat Aug 13 16:59:21 2016 -0400(David Burke): More 1.10 progress.
+                                  files_changed: report_builder/mixins.py
+                                                 report_builder/models.py
+                                                 report_builder/utils.py
+
+Thu Aug 11 19:58:07 2016 -0400(David Burke): Merge branch 'master' of git://github.com/indeedlabs/django-report-builder into indeedlabs-master
+                                  files_changed: 
+
+
+Thu Aug 11 19:55:45 2016 -0400(David Burke): Getting ready for django 1.10
+                                  files_changed: .travis.yml
+                                                 report_builder_demo/settings.py
+                                                 requirements-dev.txt
+                                                 requirements.txt
+                                                 setup.py
+
+Thu Aug 11 19:32:40 2016 -0400(David Burke): Initial fix for #236 lack of options in new report.
+Still want to add a unit test and use display name instead of name
+                                  files_changed: report_builder/api/serializers.py
+                                                 report_builder/api/views.py
+                                                 report_builder/static/report_builder/controllers.js
+                                                 report_builder/static/report_builder/partials/add.html
+                                                 report_builder/urls.py
+                                                 requirements.txt
+
+Wed Aug 3 17:27:18 2016 -0500(sellis): updated mixins.py to pass flake8
+                                  files_changed: report_builder/mixins.py
+
+Fri Jul 29 11:15:35 2016 -0500(sellis): moved django-report-utils pieces into report-builder: mixins and utils. updated imports and removed references to report-utils
+                                  files_changed: docker-compose.yml
+                                                 report_builder/api/views.py
+                                                 report_builder/mixins.py
+                                                 report_builder/models.py
+                                                 report_builder/tests.py
+                                                 report_builder/utils.py
+                                                 report_builder/views.py
+                                                 report_builder_demo/settings.py
+                                                 setup.py
+
+Fri Jul 22 06:14:26 2016 +0000(Jenkins): updating changelog
+
+                                  files_changed: CHANGELOG.txt
+                                                 setup.py
+
 VERSION: 0.0.3
 2016-07-22 06:14:26.497030
 --------------------------
