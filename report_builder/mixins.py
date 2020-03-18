@@ -198,7 +198,7 @@ class DataExportMixin(object):
             model_name = model._meta.model_name
             app_label = model._meta.app_label
             can_change = user.has_perm(app_label + '.change_' + model_name)
-            can_view = user.has_perm(app_label + '.view_' + model_name)
+            can_view = True #user.has_perm(app_label + '.view_' + model_name)
 
             return can_change or can_view
 
