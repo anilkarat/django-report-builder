@@ -6,7 +6,7 @@ from django.conf import settings
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from ..models import Report, Format, FilterField
 from .serializers import (
     ReportNestedSerializer, ReportSerializer, FormatSerializer,
@@ -46,7 +46,7 @@ class ContentTypeViewSet(ReportBuilderViewMixin, viewsets.ReadOnlyModelViewSet):
     """
     queryset = ContentType.objects.all()
     serializer_class = ContentTypeSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
 
 class ReportViewSet(ReportBuilderViewMixin, viewsets.ModelViewSet):
@@ -69,7 +69,7 @@ class RelatedFieldsView(ReportBuilderViewMixin, GetFieldsMixin, APIView):
 
     """ Get related fields from an ORM model
     """
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def get_data_from_request(self, request):
         self.model = request.data['model']
@@ -129,7 +129,7 @@ class FieldsView(RelatedFieldsView):
 
     """ Get direct fields and properties on an ORM model
     """
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         self.get_data_from_request(request)
@@ -247,7 +247,7 @@ class FieldsView(RelatedFieldsView):
 
 
 class GenerateReport(ReportBuilderViewMixin, DataExportMixin, APIView):
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, report_id=None):
         return self.post(request, report_id=report_id)
